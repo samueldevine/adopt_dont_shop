@@ -3,6 +3,7 @@
 
 <%= link_to "Sort by number of pets", "/shelters?sort=pet_count" %>
 
+<hr>
 <div id="pending-applications">
 <h2>Shelters with Pending Applications</h2>
 <% Shelter.pending_applications.each do |shelter| %>

@@ -1,2 +1,10 @@
-<h1><%= @shelter[0].name %></h1>
-<h3><%= @shelter[0].city %></h3>
+<h1><%= @shelter_info[0].name %></h1>
+<h4><%= @shelter_info[0].city %></h4>
+
+<hr>
+
+<div id='statistics'>
+<h2>Statistics</h2>
+<p>Number of adoptable pets at this shelter: <%= @shelter.adoptable_pet_count %></p>
+<p>Average age of adoptable pets at this shelter: <%= @shelter.average_age_of_adoptable_pets %> years</p>
+</div>
