@@ -1,4 +1,7 @@
 <h1>Application <%= @application.id %></h1>
+<p><%= link_to "Admin View", "/admin/applications/#{@application.id}" %></p>
+
+<hr>
 
 <% if !@application.description %>
   <div>

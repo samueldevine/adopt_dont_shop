@@ -1,4 +1,7 @@
 <h1>Application <%= @application.id %></h1>
+<p><%= link_to "User View", "/applications/#{@application.id}" %></p>
+
+<hr>
 
 <h3>Name: <%= @application.name %></h3>
 <h3>Address: <%= @application.address %></h3>
