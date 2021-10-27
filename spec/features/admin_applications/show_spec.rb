@@ -28,7 +28,7 @@ RSpec.describe 'the admin application show page' do
       click_on 'Approve'
 
       expect(current_path).to eq "/admin/applications/#{application.id}"
-      expect(page).to have_content 'Approved'
+      expect(page).to have_content ': Approved'
       expect(page).to_not have_button 'Approve'
     end
   end
@@ -62,19 +62,74 @@ RSpec.describe 'the admin application show page' do
       description: 'I need some cats for my rats!'
     ) }
 
-    it 'is not affected by approvals or rejections in another application' do
+    it 'pets can be approved or rejected despite approvals in another application' do
+      application.pets << fluffy
+      application.pets << buffy
+      application2.pets << fluffy
+      visit "/admin/applications/#{application.id}"
+
+      within "div#pet-#{fluffy.id}" do
+        click_on 'Approve'
+
+        expect(page).to_not have_button 'Approve'
+        expect(page).to_not have_button 'Reject'
+      end
+
+      visit "/admin/applications/#{application2.id}"
+
+      within "div#pet-#{fluffy.id}" do
+        expect(page).to have_button 'Approve'
+        expect(page).to have_button 'Reject'
+      end
+    end
+
+    it 'pets cannot be approved or rejected if they are on another application that has been fully approved' do
       application.pets << fluffy
       application2.pets << fluffy
       visit "/admin/applications/#{application.id}"
-      click_on 'Reject'
+      click_on 'Approve'
 
       expect(page).to_not have_button 'Approve'
       expect(page).to_not have_button 'Reject'
 
       visit "/admin/applications/#{application2.id}"
 
-      expect(page).to have_button 'Approve'
-      expect(page).to have_button 'Reject'
+      expect(page).to_not have_button 'Approve'
+      expect(page).to_not have_button 'Reject'
+      expect(page).to have_content 'Sorry, this pet has already been approved for adoption!'
+    end
+  end
+
+  describe 'when all pets on an application have been approved' do
+    it "the application's status changes to 'Approved'" do
+      application.pets << fluffy
+      visit "/admin/applications/#{application.id}"
+      click_on 'Approve'
+
+      expect(page).to have_content 'Application Status: Approved'
+    end
+
+    it 'all of the applications pets are no longer adoptable' do
+      application.pets << fluffy
+      visit "/pets/#{fluffy.id}"
+
+      expect(page).to have_content 'true'
+
+      visit "/admin/applications/#{application.id}"
+      click_on 'Approve'
+      visit "/pets/#{fluffy.id}"
+
+      expect(page).to have_content 'false'
+    end
+  end
+
+  describe 'when one or more pets on an application have been rejected' do
+    it "the application's status changes to 'Rejected'" do
+      application.pets << fluffy
+      visit "/admin/applications/#{application.id}"
+      click_on 'Reject'
+
+      expect(page).to have_content 'Application Status: Rejected'
     end
   end
 end

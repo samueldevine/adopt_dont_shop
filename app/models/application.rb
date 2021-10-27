@@ -13,11 +13,15 @@ class Application < ApplicationRecord
   end
 
   def find_pet_application(pet_id)
-    PetApplication.all.where(application_id: id).find_by(pet_id: pet_id)
+    PetApplication.where(application_id: id).find_by(pet_id: pet_id)
   end
 
   def approved(pet_id)
     find_pet_application(pet_id).approved
+  end
+
+  def all_pets_approved?
+    pet_applications.where(approved: false || nil).count == 0
   end
 
   def search_pets(query)

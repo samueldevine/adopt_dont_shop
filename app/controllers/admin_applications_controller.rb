@@ -10,10 +10,17 @@ class AdminApplicationsController < ApplicationController
       petapp = application.find_pet_application(params[:pet_id])
     end
 
-    if petapp && params[:commit] == 'Approve'
+    if params[:commit] == 'Approve'
       petapp.update(approved: true)
-    elsif petapp && params[:commit] == 'Reject'
+
+      if application.all_pets_approved?
+        application.update(status: 'Approved')
+        application.pets.update(adoptable: false)
+      end
+
+    elsif params[:commit] == 'Reject'
       petapp.update(approved: false)
+      application.update(status: 'Rejected')
     end
 
     redirect_to "/admin/applications/#{application.id}"
