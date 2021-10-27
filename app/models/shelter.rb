@@ -17,7 +17,7 @@ class Shelter < ApplicationRecord
   end
 
   def self.pending_applications
-    Shelter.find(Application.where(status: 'Pending').joins(:pets).pluck(:shelter_id))
+    find(Application.where(status: 'Pending').joins(:pets).pluck(:shelter_id))
   end
 
   def pet_count

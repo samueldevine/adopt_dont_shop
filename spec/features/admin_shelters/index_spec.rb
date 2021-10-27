@@ -68,4 +68,13 @@ RSpec.describe 'the admin shelters index' do
       expect(page).to_not have_content @beta.name
     end
   end
+
+  describe 'usability' do
+    it 'each shelters name links to the admin show page for that shelter' do
+      visit '/admin/shelters'
+      click_on @maxfund.name
+
+      expect(current_path).to eq "/admin/shelters/#{@maxfund.id}"
+    end
+  end
 end
