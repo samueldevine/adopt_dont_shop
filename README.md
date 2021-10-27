@@ -45,7 +45,7 @@ During the evaluation, you will present your user story:
 ## Deploy
 
 ```
-[ ] done
+[x] done
 
 Deploy your application to Heroku
 
@@ -113,7 +113,7 @@ And I see a message that I must fill in those fields.
 ```
 
 ```
-[ ] done
+[x] done
 
 Searching for Pets for an Application
 
@@ -129,7 +129,7 @@ And under the search bar I see any Pet whose name matches my search
 ```
 
 ```
-[ ] done
+[x] done
 
 Add a Pet to an Application
 
@@ -144,7 +144,7 @@ And I see the Pet I want to adopt listed on this application
 ```
 
 ```
-[ ] done
+[x] done
 
 Submit an Application
 
@@ -162,7 +162,7 @@ And I do not see a section to add more pets to this application
 ```
 
 ```
-[ ] done
+[x] done
 
 No Pets on an Application
 
@@ -177,7 +177,7 @@ Then I do not see a section to submit my application
 These stories emphasize key database concepts
 
 ```
-[ ] done
+[x] done
 
 Partial Matches for Pet Names
 
@@ -189,7 +189,7 @@ For example, if I search for "fluff", my search would match pets with names "flu
 ```
 
 ```
-[ ] done
+[x] done
 
 Case Insensitive Matches for Pet Names
 
@@ -230,7 +230,7 @@ Pets on an application can either be accepted or rejected.
 For this set of stories, we will be making routes that begin with '/admin'. This is to indicate that only a user with special privileges should be able to accept or reject pets on an application. Normally, we would want to make sure that a user is logged into an admin account before being able complete any of this workflow, but we will not add any log in or authorization functionality to this project.
 
 ```
-[ ] done
+[x] done
 
 Approving a Pet for Adoption
 
@@ -244,7 +244,7 @@ And instead I see an indicator next to the pet that they have been approved
 ```
 
 ```
-[ ] done
+[x] done
 
 Rejecting a Pet for Adoption
 
@@ -274,7 +274,7 @@ And instead I see buttons to approve or reject the pet for this specific applica
 Once all pets on an application have been marked either accepted or rejected, then the application is no longer "Pending". If all the pets were accepted, then the application is "Accepted". If one or more pets on the application is rejected, then the entire application is "Rejected".
 
 ```
-[ ] done
+[x] done
 
 All Pets Accepted on an Application
 
@@ -286,7 +286,7 @@ And I see the application's status has changed to "Approved"
 ```
 
 ```
-[ ] done
+[x] done
 
 One or More Pets Rejected on an Application
 
@@ -311,7 +311,7 @@ Then I see that those pets are no longer "adoptable"
 ```
 Pets can only have one approved application on them at any time
 
-[ ] done
+[x] done
 
 As a visitor
 When a pet has an "Approved" application on them
