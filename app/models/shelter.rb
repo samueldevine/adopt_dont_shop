@@ -24,8 +24,12 @@ class Shelter < ApplicationRecord
     pets.count
   end
 
-  def adoptable_pet_count
+  def adoptable_pets_count
     adoptable_pets.count
+  end
+
+  def adopted_pets_count
+    pets.find_all { |pet| pet.approved_for_adoption? == true }.count
   end
 
   def adoptable_pets

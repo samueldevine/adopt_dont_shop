@@ -24,6 +24,34 @@ RSpec.describe 'the admin show page' do
     end
   end
 
+  describe 'action required section' do
+    # before :each do
+    #   @fluffy = @maxfund.pets.create(adoptable: true, age: 8, breed: 'sphynx', name: 'Fluffy')
+    #   @buffy = @maxfund.pets.create(adoptable: true, age: 4, breed: 'chihuahua', name: 'Buffy')
+    #   @elle = @maxfund.pets.create(adoptable: false, age: 4, breed: 'chihuahua', name: 'Elle')
+    #   @application = Application.create(
+    #     name:        'CatMan',
+    #     address:     '123 Main Street',
+    #     city:        'Denver',
+    #     state:       'CO',
+    #     zip:         '80204',
+    #     description: 'I WANT ALL THE CATS!',
+    #     status:      'Pending'
+    #   )
+    #   @application.pets << @fluffy
+    #   @application.pets << @buffy
+    # end
+
+    # xit 'shows a list of all pets with pending apps that need to be approved/rejected' do
+    #   visit "/admin/shelters/#{@maxfund.id}"
+
+    #   within 'div#action-required' do
+    #     expect(page).to have_content @fluffy.name
+    #     expect(page).to have_content @buffy.name
+    #   end
+    # end
+  end
+
   describe 'statistics section' do
     before :each do
       @fluffy = @maxfund.pets.create(adoptable: true, age: 8, breed: 'sphynx', name: 'Fluffy')
@@ -44,6 +72,25 @@ RSpec.describe 'the admin show page' do
 
       within 'div#statistics' do
         expect(page).to have_content 'Number of adoptable pets at this shelter: 2'
+      end
+    end
+
+    it 'shows the number of pets that have been adopted' do
+      application = Application.create(
+        name:        'CatMan',
+        address:     '123 Main Street',
+        city:        'Denver',
+        state:       'CO',
+        zip:         '80204',
+        description: 'I WANT ALL THE CATS!',
+        status:      'Approved'
+      )
+      application.pets << @fluffy
+
+      visit "/admin/shelters/#{@maxfund.id}"
+
+      within 'div#statistics' do
+        expect(page).to have_content 'Number of pets that have been adopted from this shelter: 1'
       end
     end
   end
